@@ -1,0 +1,7 @@
+.env
+*.db
+*.db-shm
+*.db-wal
+incidents.db
+ai-incident-manager.exe
+ai-incident-manager
