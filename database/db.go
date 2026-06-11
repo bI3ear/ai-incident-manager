@@ -3,6 +3,7 @@ package database
 import (
 	"ai-incident-manager/models"
 	"log"
+	"os"
 
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
@@ -13,7 +14,11 @@ var DB *gorm.DB
 
 func Init() {
 	var err error
-	DB, err = gorm.Open(sqlite.Open("incidents.db"), &gorm.Config{
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "incidents.db"
+	}
+	DB, err = gorm.Open(sqlite.Open(dbPath), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
