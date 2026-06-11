@@ -21,7 +21,9 @@ WORKDIR /app
 COPY --from=builder /app/ai-incident-manager .
 COPY --from=builder /app/static ./static
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup && \
+    mkdir -p /app/data && chown appuser:appgroup /app/data
+
 USER appuser
 
 EXPOSE 8080
